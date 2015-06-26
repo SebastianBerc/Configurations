@@ -1,0 +1,46 @@
+{
+  "name": "sebastian-berc/configurations",
+  "description": ":package_description",
+  "keywords": [
+    "configuration",
+    "configurations"
+  ],
+  "homepage": "https://github.com/SebastianBerc/Configurations",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sebastian Berć",
+      "email": "contact@sebastian-berc.pl",
+      "homepage": "http://www.sebastian-berc.pl/",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.9",
+    "symfony/yaml": "~2.6",
+    "illuminate/support": "~5.0",
+    "illuminate/config": "~5.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.*",
+    "scrutinizer/ocular": "~1.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "SebastianBerc\\Configuration\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SebastianBerc\\Configuration\\Test\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  }
+}
