@@ -70,10 +70,12 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(\SebastianBerc\Configurations\Exceptions\NotEnoughMemory::class);
 
+        $fileSize = defined('HHVM_VERSION') ? ini_get('memory_limit') : 1 * pow(1024, 4);
+
         $file = m::mock("SplFileObject", [__DIR__ . '/stubs/config.yml']);
         $file->shouldReceive('getRealPath')->andReturn(__DIR__ . '/stubs/config.yml');
         $file->shouldReceive('getFileInfo')->andReturn(new \SplFileInfo(__DIR__ . '/stubs/config.yml'));
-        $file->shouldReceive('getSize')->andReturn(1 * pow(1024, 4)); // 1 TB
+        $file->shouldReceive('getSize')->andReturn($fileSize);
 
         (new Config)->open($file);
     }
@@ -82,10 +84,12 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(\SebastianBerc\Configurations\Exceptions\NotEnoughMemory::class);
 
+        $fileSize = defined('HHVM_VERSION') ? ini_get('memory_limit') : 1 * pow(1024, 4);
+
         $file = m::mock("SplFileObject", [__DIR__ . '/stubs/config.php']);
         $file->shouldReceive('getRealPath')->andReturn(__DIR__ . '/stubs/config.php');
         $file->shouldReceive('getFileInfo')->andReturn(new \SplFileInfo(__DIR__ . '/stubs/config.php'));
-        $file->shouldReceive('getSize')->andReturn(1 * pow(1024, 4)); // 1 TB
+        $file->shouldReceive('getSize')->andReturn($fileSize);
 
         (new Config)->open($file);
     }
