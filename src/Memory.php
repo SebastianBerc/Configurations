@@ -17,7 +17,8 @@ class Memory
      */
     public function getFreeMemory()
     {
-        $limit  = defined('HHVM_VERSION') ? ini_get('hhvm.memory_limit') : ini_get('memory_limit');
+        $limit  = ini_get('memory_limit');
+        var_dump($limit);
         $units  = ['B' => 0, 'K' => 1, 'M' => 2, 'G' => 3, 'T' => 4];
         $unit   = strtoupper(trim(substr($limit, -1)));
         $memory = trim(substr($limit, 0, strlen($limit) - 1));
