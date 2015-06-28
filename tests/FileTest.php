@@ -85,7 +85,7 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
         $file = m::mock("SplFileObject", [__DIR__ . '/stubs/config.php']);
         $file->shouldReceive('getRealPath')->andReturn(__DIR__ . '/stubs/config.php');
         $file->shouldReceive('getFileInfo')->andReturn(new \SplFileInfo(__DIR__ . '/stubs/config.php'));
-        $file->shouldReceive('getSize')->andReturn(1 * pow(1024, 4)); // 1 TB
+        $file->shouldReceive('getSize')->andReturn(10 * pow(1024, 4)); // 1 TB
 
         (new Config)->open($file);
     }
