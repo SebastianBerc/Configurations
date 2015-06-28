@@ -7,36 +7,19 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/SebastianBerc/Configurations.svg?style=flat-square)](https://scrutinizer-ci.com/g/SebastianBerc/Configurations)
 [![Total Downloads](https://img.shields.io/packagist/dt/sebastian-berc/Configurations.svg?style=flat-square)](https://packagist.org/packages/sebastian-berc/Configurations)
 
-**Note:** 
-
-Replace 
-```Sebastian Berć``` 
-```SebastianBerc``` 
-```http://www.sebastian-berc.pl/``` 
-```contact@sebastian-berc.pl``` 
-```SebastianBerc``` 
-```sebastian-berc``` 
-```Configurations``` 
-```:package_description``` 
-
-with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md) and [composer.json](composer.json) files, then delete this line.
-
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
-
 ## Install
 
 Via Composer
 
 ``` bash
-$ composer require league/Configurations
+$ composer require sebastian-berc/configurations
 ```
 
 ## Usage
 
 ``` php
-$skeleton = new League\Skeleton();
-echo $skeleton->echoPhrase('Hello, League!');
+$config = new SebastianBerc\Configurations\File('path/to/file.yml');
+echo $config->get('hello.world');
 ```
 
 ## Change log
