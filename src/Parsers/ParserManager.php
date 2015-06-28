@@ -22,7 +22,7 @@ class ParserManager
      */
     protected $extensions = [
         'yaml' => ['yml', 'yaml'],
-        'json' => ['json'],
+        'json' => ['json', 'js'],
         'php'  => ['php', 'php3', 'php4', 'php5', 'phtml']
     ];
 
