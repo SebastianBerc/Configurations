@@ -1,6 +1,6 @@
 <?php
 
-namespace SebastianBerc\Configuration\Exceptions;
+namespace SebastianBerc\Configurations\Exceptions;
 
 use Exception;
 
@@ -8,8 +8,7 @@ use Exception;
  * Class InvalidFileExtension
  *
  * @author  Sebastian Berć <sebastian.berc@gmail.com>
- *
- * @package SebastianBerc\Configuration\Exceptions
+ * @package SebastianBerc\Configurations\Exceptions
  */
 class InvalidFileExtension extends Exception
 {

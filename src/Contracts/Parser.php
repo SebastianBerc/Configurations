@@ -1,13 +1,12 @@
 <?php
 
-namespace SebastianBerc\Configuration\Contracts;
+namespace SebastianBerc\Configurations\Contracts;
 
 /**
  * Interface Parser
  *
  * @author  Sebastian Berć <sebastian.berc@gmail.com>
- *
- * @package SebastianBerc\Configuration\Contracts
+ * @package SebastianBerc\Configurations\Contracts
  */
 interface Parser
 {

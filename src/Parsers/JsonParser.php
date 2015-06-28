@@ -1,20 +1,19 @@
 <?php
 
-namespace SebastianBerc\Configuration\Parsers;
+namespace SebastianBerc\Configurations\Parsers;
 
-use SebastianBerc\Configuration\Contracts\Parser;
+use SebastianBerc\Configurations\Contracts\Parser;
 
 /**
  * Class JsonParser
  *
  * @author  Sebastian Berć <sebastian.berc@gmail.com>
- *
- * @package SebastianBerc\Configuration\Parsers
+ * @package SebastianBerc\Configurations\Parsers
  */
 class JsonParser implements Parser
 {
     public function parse($input)
     {
-        return json_decode($input);
+        return json_decode($input, true);
     }
 }

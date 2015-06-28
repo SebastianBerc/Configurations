@@ -1,16 +1,15 @@
 <?php
 
-namespace SebastianBerc\Configuration\Parsers;
+namespace SebastianBerc\Configurations\Parsers;
 
-use SebastianBerc\Configuration\Contracts\Parser;
+use SebastianBerc\Configurations\Contracts\Parser;
 use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class YamlParser
  *
  * @author  Sebastian Berć <sebastian.berc@gmail.com>
- *
- * @package SebastianBerc\Configuration\Parsers
+ * @package SebastianBerc\Configurations\Parsers
  */
 class YamlParser implements Parser
 {

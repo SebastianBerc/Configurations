@@ -1,27 +1,26 @@
 <?php
 
-namespace SebastianBerc\Configuration;
+namespace SebastianBerc\Configurations;
 
 use Illuminate\Config\Repository;
-use SebastianBerc\Configuration\Contracts\ConfigFile;
-use SebastianBerc\Configuration\Parsers\ParserManager;
+use SebastianBerc\Configurations\Contracts\ConfigFile;
+use SebastianBerc\Configurations\Parsers\ParserManager;
 
 /**
- * Class File
+ * Class Config
  *
  * @author  Sebastian Berć <sebastian.berc@gmail.com>
- *
- * @package SebastianBerc\Configuration
+ * @package SebastianBerc\Configurations
  */
-class File extends Repository implements ConfigFile
+class Config extends Repository implements ConfigFile
 {
     /**
-     * @var \SebastianBerc\Configuration\FilePath
+     * @var \SebastianBerc\Configurations\FilePath
      */
     protected $filePath;
 
     /**
-     * Create the new File instance.
+     * Create the new Config instance.
      *
      * @param array|string $source
      */
@@ -29,16 +28,21 @@ class File extends Repository implements ConfigFile
     {
         if (is_scalar($source)) {
             $this->setPath($source);
-            parent::__construct((new ParserManager())->parse(new \SplFileObject($source)));
+            parent::__construct((new ParserManager)->parse(new \SplFileObject($source)));
         }
 
         if (is_array($source)) {
             parent::__construct($source);
         }
+
+        if ($source instanceof \SplFileObject) {
+            $this->setPath($source->getRealPath());
+            parent::__construct((new ParserManager)->parse($source));
+        }
     }
 
     /**
-     * Create the new File instance.
+     * Create the new Config instance.
      *
      * @param string $filePath
      *
@@ -64,7 +68,7 @@ class File extends Repository implements ConfigFile
      *
      * @param string $filePath
      *
-     * @return \SebastianBerc\Configuration\FilePath
+     * @return \SebastianBerc\Configurations\FilePath
      */
     protected function setPath($filePath)
     {

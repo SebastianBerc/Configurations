@@ -1,17 +1,17 @@
 <?php
 
-namespace SebastianBerc\Configuration\Parsers;
+namespace SebastianBerc\Configurations\Parsers;
 
-use SebastianBerc\Configuration\Exceptions\InvalidFileExtension;
-use SebastianBerc\Configuration\Exceptions\NotEnoughMemory;
+use SebastianBerc\Configurations\Exceptions\InvalidFileExtension;
+use SebastianBerc\Configurations\Exceptions\NotEnoughMemory;
+use SebastianBerc\Configurations\Memory;
 use SplFileObject;
 
 /**
  * Class ParserManager
  *
  * @author  Sebastian Berć <sebastian.berc@gmail.com>
- *
- * @package SebastianBerc\Configuration\Parsers
+ * @package SebastianBerc\Configurations\Parsers
  */
 class ParserManager
 {
@@ -49,8 +49,8 @@ class ParserManager
      *
      * @param string $extension
      *
-     * @return \SebastianBerc\Configuration\Contracts\Parser
-     * @throws \SebastianBerc\Configuration\Exceptions\InvalidFileExtension
+     * @return \SebastianBerc\Configurations\Contracts\Parser
+     * @throws \SebastianBerc\Configurations\Exceptions\InvalidFileExtension
      */
     public function getParserFor($extension)
     {
@@ -61,9 +61,9 @@ class ParserManager
                 return new JsonParser();
             case in_array($extension, $this->extensions['php']):
                 return new PhpParser();
+            default:
+                throw new InvalidFileExtension;
         }
-
-        throw new InvalidFileExtension;
     }
 
     /**
@@ -72,11 +72,11 @@ class ParserManager
      * @param \SplFileObject $file
      *
      * @return string
-     * @throws \SebastianBerc\Configuration\Exceptions\NotEnoughMemory
+     * @throws \SebastianBerc\Configurations\Exceptions\NotEnoughMemory
      */
     public function getFileContent(SplFileObject $file)
     {
-        if ($file->getSize() > $this->freeMemory()) {
+        if ((new Memory)->isNotEnoughMemory($file->getSize())) {
             throw new NotEnoughMemory;
         }
 
@@ -85,20 +85,5 @@ class ParserManager
         }
 
         return isset($contents) ? $contents : '';
-    }
-
-    /**
-     * Returns free memory for php.
-     *
-     * @return string
-     */
-    public function freeMemory()
-    {
-        $limit  = ini_get('memory_limit');
-        $units  = ['B' => 0, 'K' => 1, 'M' => 2, 'G' => 3, 'T' => 4];
-        $unit   = strtoupper(trim(substr($limit, -1)));
-        $memory = trim(substr($limit, 0, strlen($limit) - 1));
-
-        return $memory * pow(1024, $units[$unit]);
     }
 }

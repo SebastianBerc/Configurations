@@ -1,16 +1,15 @@
 <?php
 
-namespace SebastianBerc\Configuration;
+namespace SebastianBerc\Configurations;
 
-use SebastianBerc\Configuration\Exceptions\InvalidFilePath;
+use SebastianBerc\Configurations\Exceptions\InvalidFilePath;
 use SplFileInfo;
 
 /**
  * Class FilePath
  *
  * @author  Sebastian Berć <sebastian.berc@gmail.com>
- *
- * @package SebastianBerc\Configuration
+ * @package SebastianBerc\Configurations
  */
 class FilePath extends SplFileInfo
 {
@@ -19,7 +18,7 @@ class FilePath extends SplFileInfo
      *
      * @param string $filePath
      *
-     * @throws \SebastianBerc\Configuration\Exceptions\InvalidFilePath
+     * @throws \SebastianBerc\Configurations\Exceptions\InvalidFilePath
      */
     public function __construct($filePath)
     {

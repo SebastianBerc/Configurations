@@ -18,7 +18,7 @@ $ composer require sebastian-berc/configurations
 ## Usage
 
 ``` php
-$config = new SebastianBerc\Configurations\File('path/to/file.yml');
+$config = new SebastianBerc\Configurations\Config('path/to/file.yml');
 echo $config->get('hello.world');
 ```
 
