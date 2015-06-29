@@ -13,20 +13,6 @@ use SebastianBerc\Configurations\Exceptions\NotEnoughMemory;
 class FileObject extends \SplFileObject
 {
     /**
-     * Create a new FileObject instance.
-     *
-     * @param string|\SplFileObject $source           The file to read or path.
-     * @param string                $open_mode        The mode in which to open the file. See fopen() for a list of
-     *                                                allowed modes.
-     * @param bool                  $use_include_path Whether to search in the include_path for filename.
-     * @param resource              $context          A valid context resource created with stream_context_create().
-     */
-    public function __construct()
-    {
-        call_user_func_array('parent::__construct', func_get_args());
-    }
-
-    /**
      * Reads entire file into a string.
      *
      * @return string The read data.
