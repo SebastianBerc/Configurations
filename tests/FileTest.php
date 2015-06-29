@@ -5,6 +5,7 @@ namespace SebastianBerc\Configurations\Tests;
 use Mockery as m;
 use SebastianBerc\Configurations\Config;
 use SebastianBerc\Configurations\FileObject;
+use SebastianBerc\Configurations\Memory;
 
 class ExampleTest extends \PHPUnit_Framework_TestCase
 {
@@ -71,17 +72,21 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(\SebastianBerc\Configurations\Exceptions\NotEnoughMemory::class);
 
-        ini_set('memory_limit', 11000000);
+        $filePath = __DIR__ . '/stubs/config.yml';
 
-        (new Config)->open(__DIR__ . '/stubs/config.yml');
+        ini_set('memory_limit', (new Memory())->getUsageMemory() * 2);
+
+        (new Config)->open($filePath);
     }
 
     public function testConfigWithInvalidPhpFileSize()
     {
         $this->setExpectedException(\SebastianBerc\Configurations\Exceptions\NotEnoughMemory::class);
 
-        ini_set('memory_limit', 11000000);
+        $filePath = __DIR__ . '/stubs/config.php';
 
-        (new Config)->open(__DIR__ . '/stubs/config.php');
+        ini_set('memory_limit', (new Memory())->getUsageMemory() * 2);
+
+        (new Config)->open($filePath);
     }
 }
