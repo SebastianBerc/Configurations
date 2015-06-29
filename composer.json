@@ -1,6 +1,6 @@
 {
   "name": "sebastian-berc/configurations",
-  "description": ":package_description",
+  "description": "Simple library to make a PHP array from differents config files.",
   "keywords": [
     "configuration",
     "configurations"
