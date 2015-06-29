@@ -13,7 +13,7 @@ class Memory
     /**
      * Returns free memory for PHP.
      *
-     * @return string
+     * @return int
      */
     public function getFreeMemory()
     {
@@ -23,7 +23,17 @@ class Memory
         $memory = trim(substr($limit, 0, strlen($limit) - 1));
         $memory = !is_numeric($unit) ? $memory * pow(1024, $units[$unit]) : $memory;
 
-        return $memory - memory_get_usage();
+        return $memory - $this->getUsageMemory();
+    }
+
+    /**
+     * Returns usage memory for PHP.
+     *
+     * @return int
+     */
+    public function getUsageMemory()
+    {
+        return memory_get_usage();
     }
 
     /**

@@ -1,9 +1,10 @@
 <?php
 
-namespace SebastianBerc\Configurationss\Tests;
+namespace SebastianBerc\Configurations\Tests;
 
 use Mockery as m;
 use SebastianBerc\Configurations\Config;
+use SebastianBerc\Configurations\FileObject;
 
 class ExampleTest extends \PHPUnit_Framework_TestCase
 {
@@ -45,7 +46,7 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
 
     public function testConfigFromSplFileObject()
     {
-        $config = (new Config)->open(new \SplFileObject(__DIR__ . '/stubs/config.php'));
+        $config = (new Config)->open(new FileObject(__DIR__ . '/stubs/config.php'));
 
         $this->assertInstanceOf(Config::class, $config);
         $this->assertTrue($config->isFromFile());
@@ -70,27 +71,17 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(\SebastianBerc\Configurations\Exceptions\NotEnoughMemory::class);
 
-        $fileSize = defined('HHVM_VERSION') ? ini_get('memory_limit') : 1 * pow(1024, 4);
+        ini_set('memory_limit', 11000000);
 
-        $file = m::mock("SplFileObject", [__DIR__ . '/stubs/config.yml']);
-        $file->shouldReceive('getRealPath')->andReturn(__DIR__ . '/stubs/config.yml');
-        $file->shouldReceive('getFileInfo')->andReturn(new \SplFileInfo(__DIR__ . '/stubs/config.yml'));
-        $file->shouldReceive('getSize')->andReturn($fileSize);
-
-        (new Config)->open($file);
+        (new Config)->open(__DIR__ . '/stubs/config.yml');
     }
 
     public function testConfigWithInvalidPhpFileSize()
     {
         $this->setExpectedException(\SebastianBerc\Configurations\Exceptions\NotEnoughMemory::class);
 
-        $fileSize = defined('HHVM_VERSION') ? ini_get('memory_limit') : 1 * pow(1024, 4);
+        ini_set('memory_limit', 11000000);
 
-        $file = m::mock("SplFileObject", [__DIR__ . '/stubs/config.php']);
-        $file->shouldReceive('getRealPath')->andReturn(__DIR__ . '/stubs/config.php');
-        $file->shouldReceive('getFileInfo')->andReturn(new \SplFileInfo(__DIR__ . '/stubs/config.php'));
-        $file->shouldReceive('getSize')->andReturn($fileSize);
-
-        (new Config)->open($file);
+        (new Config)->open(__DIR__ . '/stubs/config.php');
     }
 }

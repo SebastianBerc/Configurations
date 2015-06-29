@@ -4,8 +4,8 @@ namespace SebastianBerc\Configurations\Parsers;
 
 use SebastianBerc\Configurations\Contracts\Parser;
 use SebastianBerc\Configurations\Exceptions\NotEnoughMemory;
+use SebastianBerc\Configurations\FileObject;
 use SebastianBerc\Configurations\Memory;
-use SplFileObject;
 
 /**
  * Class PhpParser
@@ -16,14 +16,14 @@ use SplFileObject;
 class PhpParser implements Parser
 {
     /**
-     * Returns contents from give PHP file.
+     * Returns contents from given PHP file.
      *
-     * @param \SplFileObject $file
+     * @param FileObject $file
      *
      * @return string
      * @throws \SebastianBerc\Configurations\Exceptions\NotEnoughMemory
      */
-    public function getFileContent(SplFileObject $file)
+    public function getFileContent(FileObject $file)
     {
         if ((new Memory)->isNotEnoughMemory($file->getSize())) {
             throw new NotEnoughMemory;
@@ -33,12 +33,14 @@ class PhpParser implements Parser
     }
 
     /**
-     * @param string $input
+     * Parses PHP File into a PHP array.
      *
-     * @return string
+     * @param FileObject $file .
+     *
+     * @return array
      */
-    public function parse($input)
+    public function parse(FileObject $file)
     {
-        return $input;
+        return $this->getFileContent($file);
     }
 }

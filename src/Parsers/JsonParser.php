@@ -3,6 +3,7 @@
 namespace SebastianBerc\Configurations\Parsers;
 
 use SebastianBerc\Configurations\Contracts\Parser;
+use SebastianBerc\Configurations\FileObject;
 
 /**
  * Class JsonParser
@@ -12,8 +13,28 @@ use SebastianBerc\Configurations\Contracts\Parser;
  */
 class JsonParser implements Parser
 {
-    public function parse($input)
+    /**
+     * Returns contents from given JSON file.
+     *
+     * @param FileObject $file
+     *
+     * @return string
+     * @throws \SebastianBerc\Configurations\Exceptions\NotEnoughMemory
+     */
+    public function getFileContent(FileObject $file)
     {
-        return json_decode($input, true);
+        return $file->getContents();
+    }
+
+    /**
+     * Parses JSON file into a PHP array.
+     *
+     * @param FileObject $file .
+     *
+     * @return array
+     */
+    public function parse(FileObject $file)
+    {
+        return json_decode($this->getFileContent($file), true);
     }
 }

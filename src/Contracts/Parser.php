@@ -2,6 +2,8 @@
 
 namespace SebastianBerc\Configurations\Contracts;
 
+use SebastianBerc\Configurations\FileObject;
+
 /**
  * Interface Parser
  *
@@ -11,9 +13,20 @@ namespace SebastianBerc\Configurations\Contracts;
 interface Parser
 {
     /**
-     * @param string $input
+     * Returns contents from given file.
+     *
+     * @param FileObject $file
+     *
+     * @return string
+     */
+    public function getFileContent(FileObject $file);
+
+    /**
+     * Parses file into a PHP array.
+     *
+     * @param FileObject $file.
      *
      * @return array
      */
-    public function parse($input);
+    public function parse(FileObject $file);
 }

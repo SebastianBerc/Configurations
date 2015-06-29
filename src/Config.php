@@ -22,22 +22,22 @@ class Config extends Repository implements ConfigFile
     /**
      * Create the new Config instance.
      *
-     * @param array|string $source
+     * @param array|string|FileObject $source
      */
     public function __construct($source = null)
     {
         if (is_scalar($source)) {
             $this->setPath($source);
-            parent::__construct((new ParserManager)->parse(new \SplFileObject($source)));
+            $source = new FileObject($source);
+        }
+
+        if ($source instanceof FileObject) {
+            $this->setPath($source->getRealPath());
+            parent::__construct((new ParserManager)->parse($source));
         }
 
         if (is_array($source)) {
             parent::__construct($source);
-        }
-
-        if ($source instanceof \SplFileObject) {
-            $this->setPath($source->getRealPath());
-            parent::__construct((new ParserManager)->parse($source));
         }
     }
 

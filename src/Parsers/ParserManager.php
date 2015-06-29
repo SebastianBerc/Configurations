@@ -3,9 +3,7 @@
 namespace SebastianBerc\Configurations\Parsers;
 
 use SebastianBerc\Configurations\Exceptions\InvalidFileExtension;
-use SebastianBerc\Configurations\Exceptions\NotEnoughMemory;
-use SebastianBerc\Configurations\Memory;
-use SplFileObject;
+use SebastianBerc\Configurations\FileObject;
 
 /**
  * Class ParserManager
@@ -29,19 +27,15 @@ class ParserManager
     /**
      * Parse different files to php array.
      *
-     * @param \SplFileObject $file
+     * @param FileObject $file
      *
      * @return array
      */
-    public function parse(SplFileObject $file)
+    public function parse(FileObject $file)
     {
         $parser = $this->getParserFor($file->getFileInfo()->getExtension());
 
-        $content = method_exists($parser, 'getFileContent')
-            ? $parser->getFileContent($file)
-            : $this->getFileContent($file);
-
-        return $parser->parse($content);
+        return $parser->parse($file);
     }
 
     /**
@@ -64,26 +58,5 @@ class ParserManager
             default:
                 throw new InvalidFileExtension;
         }
-    }
-
-    /**
-     * Returns contents from give file.
-     *
-     * @param \SplFileObject $file
-     *
-     * @return string
-     * @throws \SebastianBerc\Configurations\Exceptions\NotEnoughMemory
-     */
-    public function getFileContent(SplFileObject $file)
-    {
-        if ((new Memory)->isNotEnoughMemory($file->getSize())) {
-            throw new NotEnoughMemory;
-        }
-
-        while ($content = $file->fgets()) {
-            isset($contents) ? $contents .= $content : $contents = $content;
-        }
-
-        return isset($contents) ? $contents : '';
     }
 }
