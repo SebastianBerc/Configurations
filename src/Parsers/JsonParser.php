@@ -2,7 +2,7 @@
 
 namespace SebastianBerc\Configurations\Parsers;
 
-use SebastianBerc\Configurations\Contracts\Parser;
+use SebastianBerc\Configurations\Contracts\ParserInterface;
 use SebastianBerc\Configurations\FileObject;
 
 /**
@@ -11,9 +11,9 @@ use SebastianBerc\Configurations\FileObject;
  * @author  Sebastian Berć <sebastian.berc@gmail.com>
  * @package SebastianBerc\Configurations\Parsers
  */
-class JsonParser implements Parser
+class JsonParser implements ParserInterface
 {
-    /**
+    /**git
      * Returns contents from given JSON file.
      *
      * @param FileObject $file

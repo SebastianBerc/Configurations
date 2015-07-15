@@ -3,12 +3,12 @@
 namespace SebastianBerc\Configurations\Contracts;
 
 /**
- * Interface ConfigFile
+ * Interface ConfigFileInterface
  *
  * @author  Sebastian Berć <sebastian.berc@gmail.com>
  * @package SebastianBerc\Configurations\Contracts
  */
-interface ConfigFile
+interface ConfigFileInterface
 {
     public function open($filePath);
 }

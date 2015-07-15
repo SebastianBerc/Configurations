@@ -2,7 +2,7 @@
 
 namespace SebastianBerc\Configurations\Parsers;
 
-use SebastianBerc\Configurations\Contracts\Parser;
+use SebastianBerc\Configurations\Contracts\ParserInterface;
 use SebastianBerc\Configurations\FileObject;
 use Symfony\Component\Yaml\Yaml;
 
@@ -12,7 +12,7 @@ use Symfony\Component\Yaml\Yaml;
  * @author  Sebastian Berć <sebastian.berc@gmail.com>
  * @package SebastianBerc\Configurations\Parsers
  */
-class YamlParser implements Parser
+class YamlParser implements ParserInterface
 {
     /**
      * Returns contents from given YAML file.

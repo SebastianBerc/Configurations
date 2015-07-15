@@ -5,12 +5,12 @@ namespace SebastianBerc\Configurations\Contracts;
 use SebastianBerc\Configurations\FileObject;
 
 /**
- * Interface Parser
+ * Interface ParserInterface
  *
  * @author  Sebastian Berć <sebastian.berc@gmail.com>
  * @package SebastianBerc\Configurations\Contracts
  */
-interface Parser
+interface ParserInterface
 {
     /**
      * Returns contents from given file.

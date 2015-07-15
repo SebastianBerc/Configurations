@@ -3,7 +3,7 @@
 namespace SebastianBerc\Configurations;
 
 use Illuminate\Config\Repository;
-use SebastianBerc\Configurations\Contracts\ConfigFile;
+use SebastianBerc\Configurations\Contracts\ConfigFileInterface;
 use SebastianBerc\Configurations\Parsers\ParserManager;
 
 /**
@@ -12,7 +12,7 @@ use SebastianBerc\Configurations\Parsers\ParserManager;
  * @author  Sebastian Berć <sebastian.berc@gmail.com>
  * @package SebastianBerc\Configurations
  */
-class Config extends Repository implements ConfigFile
+class Config extends Repository implements ConfigFileInterface
 {
     /**
      * @var \SebastianBerc\Configurations\FilePath

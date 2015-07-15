@@ -2,7 +2,7 @@
 
 namespace SebastianBerc\Configurations\Parsers;
 
-use SebastianBerc\Configurations\Contracts\Parser;
+use SebastianBerc\Configurations\Contracts\ParserInterface;
 use SebastianBerc\Configurations\Exceptions\NotEnoughMemory;
 use SebastianBerc\Configurations\FileObject;
 use SebastianBerc\Configurations\Memory;
@@ -13,7 +13,7 @@ use SebastianBerc\Configurations\Memory;
  * @author  Sebastian Berć <sebastian.berc@gmail.com>
  * @package SebastianBerc\Configurations\Parsers
  */
-class PhpParser implements Parser
+class PhpParser implements ParserInterface
 {
     /**
      * Returns contents from given PHP file.

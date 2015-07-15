@@ -43,7 +43,7 @@ class ParserManager
      *
      * @param string $extension
      *
-     * @return \SebastianBerc\Configurations\Contracts\Parser
+     * @return \SebastianBerc\Configurations\Contracts\ParserInterface
      * @throws \SebastianBerc\Configurations\Exceptions\InvalidFileExtension
      */
     public function getParserFor($extension)
