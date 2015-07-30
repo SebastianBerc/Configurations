@@ -3,6 +3,8 @@
 namespace SebastianBerc\Configurations;
 
 use Illuminate\Config\Repository;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
 use SebastianBerc\Configurations\Contracts\ConfigFileInterface;
 use SebastianBerc\Configurations\Parsers\ParserManager;
 
@@ -12,7 +14,7 @@ use SebastianBerc\Configurations\Parsers\ParserManager;
  * @author  Sebastian Berć <sebastian.berc@gmail.com>
  * @package SebastianBerc\Configurations
  */
-class Config extends Repository implements ConfigFileInterface
+class Config extends Repository implements ConfigFileInterface, Arrayable, Jsonable
 {
     /**
      * @var \SebastianBerc\Configurations\FilePath
@@ -73,5 +75,94 @@ class Config extends Repository implements ConfigFileInterface
     protected function setPath($filePath)
     {
         return $this->filePath = new FilePath($filePath);
+    }
+
+    /**
+     * Check if configuration is empty.
+     *
+     * @return bool
+     */
+    public function isEmpty()
+    {
+        return empty($this->items);
+    }
+
+    /**
+     * Set a given configuration value.
+     *
+     * @param  array|string $key
+     * @param  mixed        $value
+     *
+     * @return void
+     */
+    public function set($key, $value = null)
+    {
+        parent::set($key, $value);
+    }
+
+    /**
+     * Get the specified configuration value.
+     *
+     * @param  string $key
+     * @param  mixed  $default
+     *
+     * @return mixed
+     */
+    public function get($key, $default = null)
+    {
+        $value = parent::get($key, $default);
+
+        if (is_array($value)) {
+            return new static($value);
+        }
+
+        return $value;
+    }
+
+    /**
+     * Get dynamicly the specified configuration value.
+     *
+     * @param  string $key
+     *
+     * @return mixed
+     */
+    public function __get($key)
+    {
+        return $this->get($key);
+    }
+
+    /**
+     * Set a given configuration value.
+     *
+     * @param  array|string $key
+     * @param  mixed        $value
+     *
+     * @return void
+     */
+    public function __set($key, $value)
+    {
+        $this->set($key, array_shift($value));
+    }
+
+    /**
+     * Get the instance as an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->items;
+    }
+
+    /**
+     * Convert the object to its JSON representation.
+     *
+     * @param  int $options
+     *
+     * @return string
+     */
+    public function toJson($options = 0)
+    {
+        return json_encode($this->toArray(), $options);
     }
 }
