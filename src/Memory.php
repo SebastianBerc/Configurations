@@ -45,6 +45,10 @@ class Memory
      */
     public function isEnoughMemory($size)
     {
+        if (ini_get('memory_limit') == '-1') {
+            return true;
+        }
+
         return ($size <= $this->getFreeMemory());
     }
 
